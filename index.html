@@ -1,9 +1,95 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>My Site</title>
-  </head>
-  <body>
-    <h1>Hello World</h1>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instant Website Critique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans">
+
+    <header class="gradient-bg text-white py-16 px-4 shadow-lg">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 flex justify-center items-center gap-3">
+                <i data-lucide="search-code" class="w-10 h-10 md:w-14 md:h-14"></i>
+                Instant Critique
+            </h1>
+            <p class="text-xl opacity-90 mb-8">Professional feedback on your landing page in seconds.</p>
+            
+            <div class="glass-card p-2 rounded-full flex items-center shadow-2xl max-w-2xl mx-auto border border-white/20">
+                <input type="url" id="urlInput" placeholder="https://yourwebsite.com" 
+                    class="flex-grow bg-transparent px-6 py-3 text-gray-800 outline-none placeholder-gray-400">
+                <button onclick="analyzeSite()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-full font-bold transition-all transform hover:scale-105 active:scale-95 flex items-center gap-2">
+                    Analyze <i data-lucide="zap" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto py-12 px-4">
+        <div id="loading" class="hidden text-center py-20">
+            <div class="animate-spin inline-block w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full mb-4"></div>
+            <p class="text-gray-600 font-medium italic">Simulating deep scan... analyzing UX patterns...</p>
+        </div>
+
+        <div id="results" class="hidden grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="md:col-span-3 glass-card border border-gray-200 p-8 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-8 mb-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Overall Site Health</h2>
+                    <p class="text-gray-500">Based on accessibility, SEO, and visual hierarchy.</p>
+                </div>
+                <div class="relative w-32 h-32 flex items-center justify-center">
+                    <svg class="w-full h-full transform -rotate-90">
+                        <circle cx="64" cy="64" r="58" stroke="currentColor" stroke-width="8" fill="transparent" class="text-gray-200" />
+                        <circle cx="64" cy="64" r="58" stroke="currentColor" stroke-width="8" fill="transparent" stroke-dasharray="364.4" stroke-dashoffset="65.5" class="text-green-500" />
+                    </svg>
+                    <span class="absolute text-3xl font-black text-gray-800">82%</span>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <div class="text-blue-600 mb-4"><i data-lucide="eye"></i></div>
+                <h3 class="font-bold text-lg mb-2">Visual Hierarchy</h3>
+                <p class="text-sm text-gray-600">Your H1 is prominent, but the Call-to-Action button color lacks sufficient contrast against the hero image.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <div class="text-green-600 mb-4"><i data-lucide="trending-up"></i></div>
+                <h3 class="font-bold text-lg mb-2">SEO Health</h3>
+                <p class="text-sm text-gray-600">Meta tags detected. Recommendation: Increase keyword density in the first 200 words of the body.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <div class="text-red-600 mb-4"><i data-lucide="clock"></i></div>
+                <h3 class="font-bold text-lg mb-2">Load Performance</h3>
+                <p class="text-sm text-gray-600">LCP (Largest Contentful Paint) is 3.2s. Optimize your hero image to stay under the 2.5s threshold.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        function analyzeSite() {
+            const url = document.getElementById('urlInput').value;
+            if (!url) return alert('Please enter a URL first!');
+
+            document.getElementById('loading').classList.remove('hidden');
+            document.getElementById('results').classList.add('hidden');
+
+            // Simulating an API call
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('results').classList.remove('hidden');
+                window.scrollTo({ top: 500, behavior: 'smooth' });
+            }, 2000);
+        }
+    </script>
+</body>
 </html>
